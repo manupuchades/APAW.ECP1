@@ -7,8 +7,7 @@ public class Player {
     private int squadNumber;
     private Status status;
 
-    public Player(String id, String name, int squadNumber, Status status) {
-        this.id = id;
+    public Player(String name, int squadNumber, Status status) {
         this.name = name;
         this.squadNumber = squadNumber;
         this.status = status;
