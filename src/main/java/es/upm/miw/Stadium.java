@@ -1,10 +1,15 @@
 package es.upm.miw;
 
+import org.apache.commons.text.RandomStringGenerator;
+
 public class Stadium {
-    String id;
-    int capacity;
-    boolean covered;
-    String name;
+    private String id;
+    private int capacity;
+    private boolean covered;
+    private String name;
+
+    public Stadium() {
+    }
 
     public Stadium(String id, int capacity, boolean covered, String name) {
         this.id = id;
@@ -44,4 +49,52 @@ public class Stadium {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public static class Builder {
+
+        String id;
+        String name;
+        int capacity;
+        boolean covered;
+
+        private static final int KEY_LENGTH = 20;
+
+        public Builder() {
+            // Generates a 20 code point string, using only the letters a-z
+            RandomStringGenerator generator = new RandomStringGenerator.Builder().build();
+            this.id = generator.generate(KEY_LENGTH);
+        }
+
+        public Builder named(String name) {
+            this.name = name;
+
+            return this;
+        }
+
+        public Builder withCapacityFor(int capacity) {
+            this.capacity = capacity;
+
+            return this;
+        }
+
+        public Builder isCovered(boolean covered) {
+            this.covered = covered;
+
+            return this;
+        }
+
+        public Stadium build() {
+            Stadium stadium = new Stadium();
+
+            stadium.setId(id);
+            stadium.setCapacity(capacity);
+            stadium.setCovered(covered);
+            stadium.setName(name);
+
+            return stadium;
+        }
+
+    }
+
 }
