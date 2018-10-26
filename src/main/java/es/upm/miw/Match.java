@@ -2,7 +2,7 @@ package es.upm.miw;
 
 import java.time.LocalDateTime;
 
-public class Match {
+public class Match implements IObserver {
 
     private String id;
     private String address;
@@ -10,6 +10,9 @@ public class Match {
     private Team home;
     private Team away;
     private LocalDateTime localTime;
+
+    public Match() {
+    }
 
     public Match(String id, String address, String referee, Team home, Team away, LocalDateTime localTime) {
         this.id = id;
@@ -66,5 +69,10 @@ public class Match {
 
     public void setLocalTime(LocalDateTime localTime) {
         this.localTime = localTime;
+    }
+
+    @Override
+    public void update() {
+        System.out.println("A new Player has joined the game!");
     }
 }
