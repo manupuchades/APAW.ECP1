@@ -11,6 +11,9 @@ public class Match {
     private Team away;
     private LocalDateTime localTime;
 
+    public Match() {
+    }
+
     public Match(String id, String address, String referee, Team home, Team away, LocalDateTime localTime) {
         this.id = id;
         this.address = address;

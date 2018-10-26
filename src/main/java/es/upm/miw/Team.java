@@ -16,6 +16,9 @@ public class Team {
         this.squad = squad;
     }
 
+    public Team() {
+    }
+
     public String getId() {
         return id;
     }
