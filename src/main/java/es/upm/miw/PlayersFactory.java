@@ -2,10 +2,11 @@ package es.upm.miw;
 
 import org.apache.commons.text.RandomStringGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayersFactory {
+public class PlayersFactory implements IObservable {
 
     private static final int KEY_LENGTH = 20;
 
@@ -13,7 +14,10 @@ public class PlayersFactory {
 
     private Map<String, Player> players;
 
+    private ArrayList<IObserver> IObservers;
+
     private PlayersFactory(){
+        this.IObservers = new ArrayList<IObserver>();
         players = new HashMap<>();
     }
 
@@ -33,13 +37,28 @@ public class PlayersFactory {
         player.setId(key);
         this.players.put(key,player);
 
+        notifyObservers();
+
         return key;
     }
-
-
 
     public Player removePlayer (String key){
         return this.players.remove(key);
     }
 
+    @Override
+    public void addObserver(IObserver IObserver) {
+        IObservers.add(IObserver);
+    }
+
+    @Override
+    public void removeObserver(IObserver IObserver) {
+        IObservers.remove(IObserver);
+    }
+
+    private void notifyObservers() {
+        for (IObserver o : IObservers) {
+            o.update();
+        }
+    }
 }
